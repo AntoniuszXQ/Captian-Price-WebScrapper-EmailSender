@@ -1,13 +1,13 @@
 import smtplib
-from Scrapper import Compare_Data, productList
+from Scrapper import compare_data, product_list
 import schedule
 
 
 
 def generate_message():
-    lower_prices=Compare_Data()[0]
-    all_products=productList.keys()
-    productslower=[]
+    lower_prices=compare_data()[0]
+    all_products=product_list.keys()
+    products_lower=[]
 
     header=[]
     message=[]
@@ -16,14 +16,14 @@ def generate_message():
 
 
     for prod in lower_prices :
-        productslower.append(prod[2])
-    prdset=set(productslower)
-    uniqproduct=list(prdset)
+        products_lower.append(prod[2])
+    prdset=set(products_lower)
+    uniq_product=list(prdset)
 
 
     for product in all_products :
 
-            if uniqproduct.count(product) > 0  :
+            if uniq_product.count(product) > 0  :
 
                mess += '\n' + product + ' Przebity' + '\n' + '\n'
 
@@ -48,8 +48,8 @@ def send_email():
 
 # here you can add your email with you want to send from
     sender_email = ""
-    mailSubject = 'XXXX CENY XXXX'
-    message = f'Subject: {mailSubject}\n\n{generate_message()}'
+    mail_subject = 'XXXX CENY XXXX'
+    message = f'Subject: {mail_subject}\n\n{generate_message()}'
 
 # here is the email adress with should recive message
     rec_email = ""

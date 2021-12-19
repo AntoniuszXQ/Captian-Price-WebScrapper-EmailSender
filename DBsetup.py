@@ -1,5 +1,5 @@
 import sqlite3
-from Scrapper import GetValues, productList
+from Scrapper import get_values, product_list
 import schedule
 
 
@@ -16,11 +16,11 @@ def db_create_product(product):
 # this will add actual values to db
 def db_add_values():
 
-    for table ,url in productList.items():
+    for table ,url in product_list.items():
 
-        valuesDict = GetValues(url)
+        values_dict = get_values(url)
 
-        for key, value in valuesDict.items():
+        for key, value in values_dict.items():
 
             str = 'INSERT INTO {} VALUES ("{}",{})'.format(table, key, value)
 
@@ -29,7 +29,7 @@ def db_add_values():
 
 # this function clear all rows in all tables in Db
 def db_delete_values():
-    for table in productList.keys():
+    for table in product_list.keys():
         str = 'DELETE FROM {}'.format(table)
         cursor.execute(str)
 
@@ -42,7 +42,7 @@ def db_update_values():
 
     db_add_values()
     connection.commit()
-    print('Baza została zaaktualizowana ')
+    print('db updated')
 
 
 
